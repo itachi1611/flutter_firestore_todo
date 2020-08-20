@@ -4,16 +4,15 @@ import 'package:todos_repository/src/models/models.dart';
 import 'package:todos_repository/src/todos_repository.dart';
 
 class FirebaseTodosRepository implements TodosRepository {
-  
   final todoCollection = Firestore.instance.collection('todos');
-  
+
   @override
   Future<void> addNewTodo(Todo todo) {
     return todoCollection.add(todo.toEntity().toDocument());
   }
 
   @override
-  Future<void> deleteTodo(Todo todo) async{
+  Future<void> deleteTodo(Todo todo) async {
     return todoCollection.document(todo.id).delete();
   }
 
@@ -28,9 +27,8 @@ class FirebaseTodosRepository implements TodosRepository {
 
   @override
   Future<void> updateTodo(Todo todo) {
-    return todoCollection.document(todo.id).updateData(todo.toEntity().toDocument());
+    return todoCollection
+        .document(todo.id)
+        .updateData(todo.toEntity().toDocument());
   }
-  
-
-
-
+}
